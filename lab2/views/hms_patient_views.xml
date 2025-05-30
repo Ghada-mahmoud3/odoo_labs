@@ -1,0 +1,69 @@
+<odoo>
+    <record id="pation_tree_view" model="ir.ui.view">
+        <field name="name">Patients View</field>
+        <field name="model">hms.patient</field>
+        <field name="arch" type="xml" >
+            <tree>
+                <field name="first_name"/>
+                <field name="age"/>
+                <field name="pcr"/>
+                <field name="birth_date"/>
+                <field name="cr_ratio"/>
+                <field name="blood_type"/>
+                <field name="image"/>
+                <field name="address"/>
+                <field name="state"/>
+                <field name="department_id"/>
+                <field name="department_capacity"/>
+                <field name="email"/>
+            </tree>
+        </field>
+    </record>
+    <record id="pation_form_view" model="ir.ui.view">
+        <field name="name">Patients View Form</field>
+        <field name="model">hms.patient</field>
+        <field name="arch" type="xml" >
+        <form>
+            <sheet>
+                <notebook>
+                    <page string="Personal Info">
+                        <group string="Personal Info">
+                            <field name="first_name"/>
+                            <field name="last_name"/>
+                            <field name="age"/>
+                            <field name="birth_date"/>
+                            <field name="image"/>
+                            <field name="address"/>
+                            <field name="state"/>
+                            <field name="email"/>
+                         </group>
+                    </page>
+                    <page string="Personal Healthy">
+                        <group string="Personal Healthy">
+                            <field name="pcr"/>
+                            <field name="cr_ratio"/>
+                            <field name="blood_type"/>
+                        </group>
+                    </page>
+                    <page string="Department Info">
+                        <group  string="Department Info">
+                            <field name="department_id" domain="[('is_opened', '=', True)]"/>
+                            <field name="department_capacity"/>
+                        </group>
+                        <group  string="Doctor Info">
+                            <field name="doctor_ids" widget="many2many_tags"/>
+                        </group>
+                    </page>
+                </notebook>
+            </sheet>
+        </form>
+        </field>
+    </record>
+
+  <record id="patien_action" model="ir.actions.act_window">
+    <field name="name">Patients</field>
+    <field name="res_model">hms.patient</field>
+  </record>
+ <menuitem id="hms_patient_menu" name="Patient" parent="hms_people_menu" action="patien_action"/>
+
+</odoo>
